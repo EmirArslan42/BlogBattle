@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 
 import authRoutes from "./routes/auth.js";
 import blogRoutes from "./routes/blogs.js"
-
+import matchRoutes from "./routes/matches.js";
 
 dotenv.config();
 const app = express();
@@ -17,7 +17,7 @@ app.use(express.json());
 //Yönlendirmelerimiz burada yer alacak / routes
 app.use("/auth", authRoutes);
 app.use("/blogs", blogRoutes);
-
+app.use("/matches",matchRoutes);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {

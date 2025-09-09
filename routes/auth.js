@@ -15,7 +15,7 @@ router.post("/register",async (req,res)=>{
         }
         const salt=await bcrypt.genSalt(10);
         const passwordHash=await bcrypt.hash(password,salt);
-        const newUser=new User({username,email,passwordHash});
+        const newUser=new User({username,email,password:passwordHash});
         await newUser.save();
         
         res.json({message:"Kullanıcı kayıt işlemi başarılı.Giriş yapabilirsiniz"});
@@ -33,7 +33,7 @@ router.post("/login",async (req,res)=>{
         if(!user){
            return res.status(400).json({message:"Kullanıcı bulunamadı"});
         }
-        const isMatch=await bcrypt.compare(password,User.password);
+        const isMatch=await bcrypt.compare(password,user.password);
         if(!isMatch){
             return res.status(400).json({message:"Bilgiler doğru değil"});
         }

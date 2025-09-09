@@ -10,6 +10,6 @@ export const auth=(req,res,next)=>{
         req.user=verified;
         next();
     } catch (error) {
-        res.staus(401).json({message:error.message});
+        res.status(401).json({message:error.message});
     }
 }
